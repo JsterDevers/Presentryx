@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 // -------------------------------------------------------------
-// --- Custom Input & Select Field ---
+// --- Custom Input & Select Field (Remains the same) ---
 // -------------------------------------------------------------
 const InputField = ({
   label,
@@ -112,7 +112,8 @@ const InputField = ({
 // -------------------------------------------------------------
 // --- MAIN LOGIN COMPONENT ---
 // -------------------------------------------------------------
-export default function LoginPage({ onLogin, onSwitch }) {
+// 🔴 FIX: Receive the apiBaseUrl prop
+export default function LoginPage({ onLogin, onSwitch, apiBaseUrl }) {
   // Main Login States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -160,7 +161,7 @@ export default function LoginPage({ onLogin, onSwitch }) {
     return formatted;
   };
 
-  // --- Validation Helpers ---
+  // --- Validation Helpers (Same as before) ---
   const validateEmail = (value) =>
     /^([a-z0-9_\.-]+)@gmail\.com$/i.test(value.trim());
   const validatePassword = (value) =>
@@ -169,7 +170,7 @@ export default function LoginPage({ onLogin, onSwitch }) {
     );
   const validateStudentId = (value) => /^\d{4}-\d{5}-SM-\d$/.test(value.trim());
 
-  // --- Input Change Handlers ---
+  // --- Input Change Handlers (Same as before) ---
 
   const onEmailBlur = () => {
     setErrors((e) => {
@@ -314,7 +315,6 @@ export default function LoginPage({ onLogin, onSwitch }) {
   };
 
   // --- NOTE: Forgot Password logic remains CLIENT-SIDE (Mocked) ---
-  // The backend provided does not yet have password reset routes.
   const handleVerifyAccount = (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -340,8 +340,6 @@ export default function LoginPage({ onLogin, onSwitch }) {
 
     // --- Mock Logic for Forgot Password (No API endpoint available yet) ---
     setErrors({});
-    // Note: We can't access localStorage for user list anymore since it's backend only now
-    // But we keep this mocked for the "Forgot Password" UI flow as requested.
     const mockSuccess = true;
 
     if (mockSuccess) {
@@ -397,8 +395,8 @@ export default function LoginPage({ onLogin, onSwitch }) {
   };
 
   /**
-   * 🚨 *** UPDATED handleSubmit for API CONNECTION *** 🚨
-   * This now fetches data from http://localhost:3001/api/login
+   * 🚨 *** FINAL FIX: UPDATED handleSubmit for API CONNECTION *** 🚨
+   * This now uses the apiBaseUrl prop instead of a hardcoded URL.
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -433,7 +431,8 @@ export default function LoginPage({ onLogin, onSwitch }) {
     try {
       setErrors({}); // Clear previous errors
 
-      const response = await fetch("http://localhost:3001/api/login", {
+      // 🔴 FIX APPLIED HERE: Use the apiBaseUrl prop
+      const response = await fetch(`${apiBaseUrl}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -488,8 +487,9 @@ export default function LoginPage({ onLogin, onSwitch }) {
       }
     } catch (error) {
       console.error("API Login Error:", error);
+      // The error you were seeing is now generated here if connection fails
       setErrors({
-        general: "❌ Server connection failed. Is the backend running?",
+        general: "❌ Server connection failed. Is the backend URL correct?",
       });
     }
   };
@@ -895,6 +895,7 @@ export default function LoginPage({ onLogin, onSwitch }) {
             key="form-col-content"
             // FIX APPLIED: Changed items-center to items-start to pin content to the top.
             // Content expansion due to errors will now push elements downwards.
+            // py-20 keeps the padding consistent
             className="bg-white flex-1 flex items-start justify-center py-10 md:py-20 relative md:h-screen overflow-y-auto"
           >
             {/* The form content (login or forgot password) still uses AnimatePresence for smooth transitions */}

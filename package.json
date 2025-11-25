@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^5.1.0",
+    "express-mysql-session": "^3.0.3",
+    "express-session": "^1.18.2",
     "firebase": "^12.4.0",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.545.0",

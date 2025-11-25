@@ -7,6 +7,7 @@ import AppFooter from "./AppFooter";
 import AuthContainer from "./components/AuthContainer";
 import DevelopersPage from "./components/Developers";
 import "react-datepicker/dist/react-datepicker.css";
+import { AlertTriangle } from "lucide-react"; 
 
 // --- DASHBOARDS ---
 import AdminDashboard from "./components/AdminDashboard";
@@ -16,6 +17,28 @@ import StudentDashboard from "./components/StudentDashboard";
 // --- GLOBAL LOCK VARIABLE ---
 let isGlobalLogoutProcessing = false;
 
+// --- DYNAMIC URL CONSTRUCTION ---
+// This function determines the correct API base URL for Codespaces or localhost.
+const getApiBaseUrl = () => {
+  const BACKEND_PORT = 3001;
+  const isCodespace = window.location.hostname.endsWith(".app.github.dev");
+
+  if (isCodespace) {
+    // Automatically construct the secure public URL for port 3001
+    // e.g., https://<hash>-5173.app.github.dev -> https://<hash>-3001.app.github.dev
+    
+    // Regex to strip the frontend port (e.g., -5173) and replace it with -3001
+    const codespaceHost = window.location.hostname.replace(/-\d{4}\.app\.github\.dev$/, `-${BACKEND_PORT}.app.github.dev`);
+    return `https://${codespaceHost}`;
+  }
+  // Standard local development fallback
+  return `http://localhost:${BACKEND_PORT}`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
+// --- END DYNAMIC URL CONSTRUCTION ---
+
+
 export default function App() {
   // --- State Management ---
   const [formData, setFormData] = useState({ email: "", name: "" });
@@ -23,9 +46,10 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [initialAuthIsLogin, setInitialAuthIsLogin] = useState(true);
-
-  const API_BASE_URL = "http://localhost:3001";
-
+  
+  // URL validation check is no longer needed since it's dynamic
+  const isUrlSetupCorrect = true; 
+  
   // --- 1. PERSIST VIEW ---
   useEffect(() => {
     if (page !== "login" && page !== "landing") {
@@ -36,6 +60,7 @@ export default function App() {
   // --- 2. CHECK SESSION ON LOAD ---
   useEffect(() => {
     const checkSession = async () => {
+      
       // 1. Check if this specific tab has an active session marker
       const tabUserId = sessionStorage.getItem("tab_user_id");
 
@@ -43,7 +68,7 @@ export default function App() {
       if (!tabUserId) {
         setIsLoading(false);
         setPage("landing");
-        return; 
+        return;
       }
 
       try {
@@ -57,27 +82,24 @@ export default function App() {
 
         if (data.authenticated && data.user) {
           // --- SECURITY CHECK: SESSION MISMATCH ---
-          // Compare the User ID in the Cookie (Global) vs User ID in this Tab (Local)
-          // If Tab A expects User 1, but Cookie says User 2 (because Tab B logged in),
-          // We must force Tab A to logout to prevent cross-account confusion.
           if (String(data.user.id) !== String(tabUserId)) {
-             console.warn("Session mismatch detected. Logging out of this tab.");
-             handleLocalLogout();
-             return;
+            console.warn("Session mismatch detected. Logging out of this tab.");
+            handleLocalLogout();
+            return;
           }
 
           const fullName = `${data.user.firstname} ${data.user.lastname}`;
-          
+
           // Capitalize Role
-          const role = data.user.role 
-            ? data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1) 
+          const role = data.user.role
+            ? data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1)
             : "Student";
 
           setCurrentUser({
             ...data.user,
             name: fullName,
             fullname: fullName,
-            role: role, 
+            role: role,
           });
 
           const lastView = sessionStorage.getItem("last_view");
@@ -87,10 +109,11 @@ export default function App() {
             setPage("dashboard");
           }
         } else {
-          handleLocalLogout(); 
+          handleLocalLogout();
         }
       } catch (error) {
-        console.error("Session check failed:", error);
+        // If the URL is wrong or the server is down, this catches it
+        console.error("Session check failed (Network Error).", error);
         handleLocalLogout();
       } finally {
         setIsLoading(false);
@@ -98,7 +121,7 @@ export default function App() {
     };
 
     checkSession();
-  }, []);
+  }, [API_BASE_URL]);
 
   // --- Helper: Clear Local State Only ---
   const handleLocalLogout = () => {
@@ -129,7 +152,7 @@ export default function App() {
     } finally {
       handleLocalLogout();
       setInitialAuthIsLogin(true);
-      
+
       setTimeout(() => {
         isGlobalLogoutProcessing = false;
       }, 1000);
@@ -168,10 +191,10 @@ export default function App() {
   // --- Handle Login Success ---
   const handleLoginSuccess = (backendUser) => {
       const fullName = `${backendUser.firstname} ${backendUser.lastname}`;
-      const role = backendUser.role 
-        ? backendUser.role.charAt(0).toUpperCase() + backendUser.role.slice(1) 
+      const role = backendUser.role
+        ? backendUser.role.charAt(0).toUpperCase() + backendUser.role.slice(1)
         : "Student";
-        
+
       setCurrentUser({
         ...backendUser,
         name: fullName,
@@ -181,7 +204,7 @@ export default function App() {
 
       // CRITICAL: Save the User ID to this specific Tab
       sessionStorage.setItem("tab_user_id", backendUser.id);
-      
+
       setPage("dashboard");
   };
 
@@ -194,16 +217,17 @@ export default function App() {
     );
   }
 
+
   // --- ROLE BASED ROUTING ---
   if (page === "dashboard" && currentUser) {
     switch (currentUser.role) {
       case "Admin":
-        return <AdminDashboard user={currentUser} onLogout={handleLogout} />;
+        return <AdminDashboard user={currentUser} onLogout={handleLogout} apiBaseUrl={API_BASE_URL} />;
       case "Faculty":
-        return <FacultyDashboard user={currentUser} onLogout={handleLogout} />;
+        return <FacultyDashboard user={currentUser} onLogout={handleLogout} apiBaseUrl={API_BASE_URL} />;
       case "Student":
       default:
-        return <StudentDashboard user={currentUser} onLogout={handleLogout} />;
+        return <StudentDashboard user={currentUser} onLogout={handleLogout} apiBaseUrl={API_BASE_URL} />;
     }
   }
 
@@ -218,11 +242,21 @@ export default function App() {
 
   if (page === "login") {
     return (
-      <AuthContainer
-        initialIsLogin={initialAuthIsLogin}
-        onLogin={handleLoginSuccess}
-        onSignup={() => console.log("Signed up")}
-      />
+      <>
+        {/* If the dynamic URL calculation failed, show a non-blocking warning. */}
+        {!isUrlSetupCorrect && (
+          <div className="absolute top-0 left-0 right-0 p-3 bg-red-100 text-red-700 text-xs font-medium border-b border-red-300 z-50 flex items-center justify-center gap-2">
+            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+            <p>SETUP ALERT: Could not automatically determine API Base URL. Network calls might fail.</p>
+          </div>
+        )}
+        <AuthContainer
+          initialIsLogin={initialAuthIsLogin}
+          onLogin={handleLoginSuccess}
+          onSignup={() => console.log("Signed up")}
+          apiBaseUrl={API_BASE_URL} // Pass the correct URL to the Auth component
+        />
+      </>
     );
   }
 

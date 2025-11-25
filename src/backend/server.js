@@ -10,15 +10,34 @@ const PORT = 3001;
 
 // --- Constants ---
 const SESSION_SECRET = "your_secure_random_secret_key_here";
-const ALLOWED_ORIGIN = "http://localhost:5173";
+// The ALLOWED_ORIGIN constant is removed as origin is handled dynamically below.
 const ONE_DAY = 86400000;
 
 // --- 1. Middleware Configuration ---
+// FIX: Dynamic CORS configuration to allow Codespaces URLs for cross-port communication
 app.use(
   cors({
-    origin: ALLOWED_ORIGIN,
+    origin: (origin, callback) => {
+      // 1. Allow if there is no origin (e.g., direct requests, tool tests)
+      if (!origin) {
+        return callback(null, true);
+      }
+      
+      // 2. Allow localhost (for local testing)
+      if (origin.includes("localhost")) {
+        return callback(null, true);
+      }
+      
+      // 3. Allow any GitHub Codespace domain (*.app.github.dev)
+      if (origin.endsWith(".app.github.dev")) {
+        return callback(null, true);
+      }
+      
+      // Otherwise, reject the connection
+      callback(new Error('Not allowed by CORS'));
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    credentials: true, // Crucial for session cookies
   })
 );
 
@@ -416,5 +435,5 @@ app.post("/api/schedules", async (req, res) => {
 // --- Server Start ---
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
-  console.log(`   - Origin: ${ALLOWED_ORIGIN}`);
+  console.log(`   - FIX: CORS now allows GitHub Codespace origins.`);
 });

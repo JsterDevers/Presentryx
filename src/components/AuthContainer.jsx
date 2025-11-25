@@ -3,8 +3,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 
-// Default initialIsLogin to true so it doesn't break if undefined
-export default function AuthContainer({ onLogin, initialIsLogin = true }) {
+// Receive the apiBaseUrl here and pass it down
+export default function AuthContainer({ 
+    onLogin, 
+    initialIsLogin = true, 
+    apiBaseUrl // <-- RECEIVED HERE
+}) {
   const [isLogin, setIsLogin] = useState(initialIsLogin);
 
   // --- THE FIX ---
@@ -33,7 +37,12 @@ export default function AuthContainer({ onLogin, initialIsLogin = true }) {
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="w-full"
           >
-            <LoginPage onLogin={onLogin} onSwitch={handleSwitch} />
+            {/* PASSED HERE */}
+            <LoginPage 
+                onLogin={onLogin} 
+                onSwitch={handleSwitch} 
+                apiBaseUrl={apiBaseUrl} 
+            />
           </motion.div>
         ) : (
           <motion.div
@@ -44,7 +53,12 @@ export default function AuthContainer({ onLogin, initialIsLogin = true }) {
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="w-full"
           >
-            <SignupPage onSwitch={handleSwitch} onSuccess={handleSignupSuccess} />
+            {/* PASSED HERE */}
+            <SignupPage 
+                onSwitch={handleSwitch} 
+                onSuccess={handleSignupSuccess} 
+                apiBaseUrl={apiBaseUrl} 
+            />
           </motion.div>
         )}
       </AnimatePresence>
