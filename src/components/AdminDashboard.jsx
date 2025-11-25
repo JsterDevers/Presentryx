@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 // --- API CONFIGURATION ---
-const API_URL = "http://localhost:3001/api"; 
+// Ensure you keep the "/api" at the end!
+const API_URL = "https://cautious-waddle-jjpr947gj7jvcpjwr-3001.app.github.dev/api";
 
 // --- Icons ---
 const Icon = ({ children, className = "", size = 24 }) => (
@@ -10,9 +11,7 @@ const Icon = ({ children, className = "", size = 24 }) => (
 
 // Icon Definitions
 const LayoutDashboard = (props) => (<Icon {...props}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></Icon>);
-// (New) Book Icon for Classes
 const BookOpen = (props) => (<Icon {...props}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></Icon>);
-// The previously "unused" Users icon
 const Users = (props) => (<Icon {...props}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></Icon>);
 const Settings = (props) => (<Icon {...props}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.942 3.313.823 2.392 2.392a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.942 1.543-.823 3.313-2.392 2.392a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.942-3.313-.823-2.392-2.392a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.942-1.543.823-3.313 2.392-2.392a1.724 1.724 0 002.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></Icon>);
 const Menu = (props) => (<Icon {...props}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></Icon>);
@@ -26,11 +25,10 @@ const PAGES = {
   PROFILE: "Admin Profile",
 };
 
-// Map Pages to Icons here
 const PAGE_ICONS = {
   [PAGES.OVERVIEW]: LayoutDashboard,
   [PAGES.CLASSES]: BookOpen,
-  [PAGES.USERS]: Users,     // <--- Used here!
+  [PAGES.USERS]: Users, 
   [PAGES.PROFILE]: Settings,
 };
 
@@ -46,7 +44,7 @@ const FORMAL_COLORS = {
   BORDER: "border-slate-700",
 };
 
-// --- API HELPERS ---
+// --- API HELPERS (FIXED) ---
 const fetchData = async (endpoint) => {
   try {
     const res = await fetch(`${API_URL}${endpoint}`);
@@ -60,20 +58,36 @@ const fetchData = async (endpoint) => {
 
 const postData = async (endpoint, data) => {
   try {
+    console.log(`Sending to ${endpoint}:`, data); // Debugging: See what we are sending
     const res = await fetch(`${API_URL}${endpoint}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json" // FIX: Helps ensure server sends JSON back
+      },
       body: JSON.stringify(data),
     });
     
     if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Database Error");
+        // FIX: safely handle non-JSON errors (like 404/500 HTML pages)
+        let errorMsg = `Server Error (${res.status})`;
+        try {
+            const err = await res.json();
+            if(err.message) errorMsg = err.message;
+        } catch (e) {
+            // response was not JSON, use status text
+            errorMsg = res.statusText || errorMsg;
+        }
+        throw new Error(errorMsg);
     }
     return res.json();
   } catch (error) {
     console.error("Post error:", error);
-    alert(`Error saving to database: ${error.message}`); 
+    // If the server is down, error.message is usually "Failed to fetch"
+    const displayMsg = error.message === "Failed to fetch" 
+        ? "Cannot connect to server. Is backend running?" 
+        : error.message;
+    alert(`Error saving to database: ${displayMsg}`); 
     return null; 
   }
 };
@@ -82,7 +96,10 @@ const putData = async (endpoint, data) => {
     try {
         const res = await fetch(`${API_URL}${endpoint}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+              "Content-Type": "application/json",
+              "Accept": "application/json" 
+          },
           body: JSON.stringify(data),
         });
         if (!res.ok) throw new Error("Update Failed");
