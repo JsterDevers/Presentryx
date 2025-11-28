@@ -435,5 +435,4 @@ app.post("/api/schedules", async (req, res) => {
 // --- Server Start ---
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
-  console.log(`   - FIX: CORS now allows GitHub Codespace origins.`);
-});
+}); 
