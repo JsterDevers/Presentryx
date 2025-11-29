@@ -100,7 +100,7 @@ const InputField = ({
       <div className="h-4">
         {error && (
           <p className="mt-1 text-xs text-red-600 flex items-center gap-1 font-sans">
-            <AlertTriangle className="w-3 h-3 flex-shrink-0" />
+            <AlertTriangle className="w-3 h-3 shrink-0" />
             {error}
           </p>
         )}
@@ -644,7 +644,7 @@ export default function LoginPage({ onLogin, onSwitch, apiBaseUrl }) {
                     : "bg-red-100 text-red-700 border border-red-300"
                 } flex items-start gap-2`}
               >
-                <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{errors.general || forgotMessage}</span>
               </motion.div>
             )}
@@ -800,7 +800,7 @@ export default function LoginPage({ onLogin, onSwitch, apiBaseUrl }) {
               animate={{ opacity: 1, y: 0 }}
               className={`p-3 rounded-lg text-sm font-medium bg-red-100 text-red-700 border border-red-300 flex items-center gap-2 font-sans`}
             >
-              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+              <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{errors.general}</span>
             </motion.div>
           )}

@@ -4,18 +4,18 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-24 pb-20 bg-gradient-to-br from-purple-900 via-blue-900 to-black text-white relative overflow-hidden">
+      <section className="pt-24 pb-20 bg-linear-to-br from-purple-900 via-blue-900 to-black text-white relative overflow-hidden">
         {/* Galaxy Layers - Multi-Layered for Depth */}
         <div className="absolute inset-0 pointer-events-none z-0">
           {/* Star Field Background */}
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-15 animate-galaxy-twinkle"></div>
           {/* Nebula Clouds */}
           <div
-            className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-purple-500/20 via-blue-500/20 to-transparent rounded-full blur-3xl animate-rotate"
+            className="absolute top-1/4 left-1/4 w-64 h-64 bg-linear-to-br from-purple-500/20 via-blue-500/20 to-transparent rounded-full blur-3xl animate-rotate"
             style={{ animationDuration: "30s" }}
           ></div>
           <div
-            className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-pink-500/15 via-purple-500/15 to-transparent rounded-full blur-3xl animate-float-drift"
+            className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-linear-to-br from-pink-500/15 via-purple-500/15 to-transparent rounded-full blur-3xl animate-float-drift"
             style={{ animationDelay: "2s" }}
           ></div>
           {/* Shooting Stars */}
@@ -97,7 +97,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
       {/* Fun Facts Section */}
       <section
         id="fun-facts"
-        className="relative py-28 bg-gradient-to-b from-[#0a0f24] via-[#151e3d] to-[#0a0f24] text-white overflow-hidden"
+        className="relative py-28 bg-linear-to-b from-[#0a0f24] via-[#151e3d] to-[#0a0f24] text-white overflow-hidden"
       >
         {/* Animated Galaxy Background */}
         <div className="absolute inset-0">
@@ -109,7 +109,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-[2px] h-[2px] bg-white rounded-full animate-twinkle"
+              className="absolute w-0.5 h-0.5 bg-white rounded-full animate-twinkle"
               style={{
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
@@ -171,10 +171,10 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
 
       {/* Features Section */}
       <section id="features"></section>
-      <section className="relative py-28 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white overflow-hidden">
+      <section className="relative py-28 bg-linear-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white overflow-hidden">
         {/* Subtle Galaxy Glow Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.15),_transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(147,51,234,0.15),_transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.15),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(147,51,234,0.15),transparent_70%)]"></div>
         <div className="container mx-auto px-6 relative z-10">
           <h3 className="text-5xl font-bold text-center mb-20 text-white animate-fade-in drop-shadow-lg">
             Powerful Features for Secure Attendance
@@ -183,8 +183,8 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             {/* Left Side: Features Cards */}
             <div className="space-y-8 md:space-y-12">
               {/* Feature 1 */}
-              <div className="bg-gradient-to-br from-indigo-900/40 to-purple-800/30 p-10 rounded-2xl text-center backdrop-blur-md hover:shadow-2xl hover:-translate-y-4 hover:rotate-1 transition-all duration-500 border border-indigo-700/30 relative z-10">
-                <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-teal-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse-slow">
+              <div className="bg-linear-to-br from-indigo-900/40 to-purple-800/30 p-10 rounded-2xl text-center backdrop-blur-md hover:shadow-2xl hover:-translate-y-4 hover:rotate-1 transition-all duration-500 border border-indigo-700/30 relative z-10">
+                <div className="w-20 h-20 bg-linear-to-r from-green-400 to-teal-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse-slow">
                   <span className="text-3xl">👤</span>
                 </div>
                 <h4 className="text-3xl font-bold mb-6 text-white drop-shadow-sm">
@@ -196,8 +196,8 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
                 </p>
               </div>
               {/* Feature 2 */}
-              <div className="bg-gradient-to-br from-indigo-900/40 to-blue-800/30 p-10 rounded-2xl text-center backdrop-blur-md hover:shadow-2xl hover:-translate-y-4 hover:rotate-[-1deg] transition-all duration-500 border border-blue-700/30 relative z-10">
-                <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-bounce-slow">
+              <div className="bg-linear-to-br from-indigo-900/40 to-blue-800/30 p-10 rounded-2xl text-center backdrop-blur-md hover:shadow-2xl hover:-translate-y-4 hover:-rotate-1 transition-all duration-500 border border-blue-700/30 relative z-10">
+                <div className="w-20 h-20 bg-linear-to-r from-blue-400 to-indigo-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-bounce-slow">
                   <span className="text-3xl">⚡</span>
                 </div>
                 <h4 className="text-3xl font-bold mb-6 text-white drop-shadow-sm">
@@ -209,8 +209,8 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
                 </p>
               </div>
               {/* Feature 3 */}
-              <div className="bg-gradient-to-br from-purple-900/40 to-pink-800/30 p-10 rounded-2xl text-center backdrop-blur-md hover:shadow-2xl hover:-translate-y-4 hover:rotate-2 transition-all duration-500 border border-purple-700/30 relative z-10">
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse">
+              <div className="bg-linear-to-br from-purple-900/40 to-pink-800/30 p-10 rounded-2xl text-center backdrop-blur-md hover:shadow-2xl hover:-translate-y-4 hover:rotate-2 transition-all duration-500 border border-purple-700/30 relative z-10">
+                <div className="w-20 h-20 bg-linear-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse">
                   <span className="text-3xl">📊</span>
                 </div>
                 <h4 className="text-3xl font-bold mb-6 text-white drop-shadow-sm">
@@ -223,9 +223,9 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
               </div>
             </div>
             {/* Right Side: Secure Attendance Card */}
-            <div className="bg-gradient-to-br from-slate-900/60 to-indigo-900/40 backdrop-blur-md rounded-2xl p-8 border border-indigo-700/40 shadow-2xl flex flex-col justify-center items-center min-h-[600px] space-y-6 relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05),_transparent_70%)]"></div>
-              <div className="w-24 h-24 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse-slow z-10">
+            <div className="bg-linear-to-br from-slate-900/60 to-indigo-900/40 backdrop-blur-md rounded-2xl p-8 border border-indigo-700/40 shadow-2xl flex flex-col justify-center items-center min-h-[600px] space-y-6 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_70%)]"></div>
+              <div className="w-24 h-24 bg-linear-to-r from-blue-400 to-indigo-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse-slow z-10">
                 <span className="text-5xl">🔒</span>
               </div>
               <h4 className="text-3xl font-bold mb-6 text-white text-center z-10">
@@ -254,7 +254,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
                   Compliance Analytics
                 </li>
               </ul>
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2 group z-10">
+              <button className="bg-linear-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2 group z-10">
                 <span className="text-xl group-hover:rotate-12 transition-transform duration-300">
                   🔒
                 </span>
@@ -268,7 +268,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
       {/* How it works section */}
       <section
         id="how-it-works"
-        className="relative py-24 overflow-hidden bg-gradient-to-b from-[#0a0333] via-[#1a0b52] to-[#0b0224] text-white"
+        className="relative py-24 overflow-hidden bg-linear-to-b from-[#0a0333] via-[#1a0b52] to-[#0b0224] text-white"
       >
         {/* Animated Galaxy Background Orbs */}
         <div className="absolute inset-0">
@@ -278,7 +278,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
         </div>
         {/* Content Container */}
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-5xl font-extrabold mb-12 drop-shadow-lg bg-gradient-to-r from-blue-300 via-purple-400 to-pink-300 text-transparent bg-clip-text animate-fade-in">
+          <h2 className="text-5xl font-extrabold mb-12 drop-shadow-lg bg-linear-to-r from-blue-300 via-purple-400 to-pink-300 text-transparent bg-clip-text animate-fade-in">
             How It Works
           </h2>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-20 leading-relaxed">
@@ -290,7 +290,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
           <div className="grid md:grid-cols-3 gap-10">
             {/* Step 1 */}
             <div className="bg-white/10 backdrop-blur-md p-10 rounded-2xl border border-white/20 hover:border-indigo-400 hover:shadow-indigo-500/50 hover:shadow-2xl transition-all duration-500">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-4xl shadow-lg">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-4xl shadow-lg">
                 📷
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white drop-shadow-md">
@@ -304,7 +304,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             </div>
             {/* Step 2 */}
             <div className="bg-white/10 backdrop-blur-md p-10 rounded-2xl border border-white/20 hover:border-purple-400 hover:shadow-purple-500/50 hover:shadow-2xl transition-all duration-500">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-4xl shadow-lg">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-r from-purple-500 to-pink-500 flex items-center justify-center text-4xl shadow-lg">
                 ☁️
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white drop-shadow-md">
@@ -317,7 +317,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             </div>
             {/* Step 3 */}
             <div className="bg-white/10 backdrop-blur-md p-10 rounded-2xl border border-white/20 hover:border-blue-400 hover:shadow-blue-500/50 hover:shadow-2xl transition-all duration-500">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 flex items-center justify-center text-4xl shadow-lg">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-r from-teal-400 to-blue-500 flex items-center justify-center text-4xl shadow-lg">
                 📊
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white drop-shadow-md">
@@ -331,7 +331,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
           </div>
           {/* Call to Action */}
           <div className="mt-20">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-600 hover:to-pink-600 text-white px-10 py-4 rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 flex items-center mx-auto space-x-2">
+            <button className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-purple-600 hover:to-pink-600 text-white px-10 py-4 rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 flex items-center mx-auto space-x-2">
               <span className="text-2xl animate-pulse">🚀</span>
               <span>Start Secure Attendance</span>
             </button>
@@ -344,11 +344,11 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
       {/* About Section */}
       <section
         id="about"
-        className="relative py-24 bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#0f172a] text-white overflow-hidden"
+        className="relative py-24 bg-linear-to-br from-[#0f172a] via-[#1e1b4b] to-[#0f172a] text-white overflow-hidden"
       >
         {/* Galaxy Glow Layers */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.15),_transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(147,51,234,0.15),_transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.15),transparent_70%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(147,51,234,0.15),transparent_70%)]"></div>
         {/* Subtle Stars */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-soft-light"></div>
         <div className="container mx-auto px-6 max-w-5xl text-center relative z-10">
@@ -366,7 +366,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             future of attendance today.
           </p>
           <div className="mt-12 flex justify-center items-center flex-col space-y-4">
-            <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-xl animate-pulse-slow">
+            <div className="w-24 h-24 bg-linear-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-xl animate-pulse-slow">
               <span className="text-6xl">👨‍🏫</span>
             </div>
             <p className="text-gray-300 text-lg max-w-md">
@@ -378,7 +378,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
       </section>
 
       {/* Testimonials Section - Smart Learning in Motion (Updated with 3D animated objects) */}
-      <section className="py-24 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] relative overflow-hidden">
+      <section className="py-24 bg-linear-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 animate-twinkle"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <h3 className="text-5xl font-extrabold text-white mb-16 drop-shadow-lg">
@@ -388,7 +388,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             {/* 3D Card 1 - Students */}
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-8 shadow-xl transform transition-transform duration-700 hover:-translate-y-6 hover:rotate-3 border border-blue-400/30">
               <div className="w-48 h-48 mx-auto mb-6 flex items-center justify-center perspective-1000">
-                <div className="w-full h-full bg-gradient-to-tr from-blue-300 to-purple-400 rounded-full animate-rotate-3d flex items-center justify-center text-8xl shadow-2xl">
+                <div className="w-full h-full bg-linear-to-tr from-blue-300 to-purple-400 rounded-full animate-rotate-3d flex items-center justify-center text-8xl shadow-2xl">
                   🧑‍🎓
                 </div>
               </div>
@@ -403,7 +403,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             {/* 3D Card 2 - Mobile */}
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-8 shadow-xl transform transition-transform duration-700 hover:-translate-y-6 hover:-rotate-3 border border-pink-400/30">
               <div className="w-48 h-48 mx-auto mb-6 flex items-center justify-center perspective-1000">
-                <div className="w-full h-full bg-gradient-to-tr from-pink-300 to-red-400 rounded-full animate-scale-bounce-3d flex items-center justify-center text-8xl shadow-2xl">
+                <div className="w-full h-full bg-linear-to-tr from-pink-300 to-red-400 rounded-full animate-scale-bounce-3d flex items-center justify-center text-8xl shadow-2xl">
                   📱
                 </div>
               </div>
@@ -418,7 +418,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
             {/* 3D Card 3 - Dashboard */}
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl p-8 shadow-xl transform transition-transform duration-700 hover:-translate-y-6 hover:rotate-2 border border-green-400/30">
               <div className="w-48 h-48 mx-auto mb-6 flex items-center justify-center perspective-1000">
-                <div className="w-full h-full bg-gradient-to-tr from-green-300 to-teal-400 rounded-full animate-pulse-3d flex items-center justify-center text-8xl shadow-2xl">
+                <div className="w-full h-full bg-linear-to-tr from-green-300 to-teal-400 rounded-full animate-pulse-3d flex items-center justify-center text-8xl shadow-2xl">
                   🖥️
                 </div>
                
@@ -437,7 +437,7 @@ function AppMain({ formData, handleInputChange, handleSubmit, onShowDevelopers }
       {/*  CONTACT SECTION (SLEEK, MODERN, AND MINIMALIST DESIGN)  */}
       <section
         id="contact"
-        className="py-24 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden"
+        className="py-24 bg-linear-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden"
       >
         {/* Subtle geometric pattern / texture for background */}
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/clean-gray-paper.png')]"></div>

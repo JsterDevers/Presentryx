@@ -26,7 +26,7 @@ export default function AuthContainer({
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-100 via-white to-indigo-100 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center bg-linear-to-b from-blue-100 via-white to-indigo-100 overflow-hidden">
       <AnimatePresence mode="wait">
         {isLogin ? (
           <motion.div

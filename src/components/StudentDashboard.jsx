@@ -232,7 +232,7 @@ function TopBar({ user, setSidebarOpen }) {
           className={`w-9 h-9 rounded-full ${FORMAL_COLORS.BG_ACCENT.replace(
             "bg-",
             "bg-"
-          )} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}
+          )} flex items-center justify-center text-white font-bold text-sm shrink-0`}
         >
           {fullname ? fullname.charAt(0) : "S"}
         </div>
@@ -438,7 +438,7 @@ function DashboardInner({ user, onLogout }) {
 
       {/* Desktop Sidebar */}
       <aside
-        className={`hidden md:flex flex-col w-64 h-full ${sidebarColor} ${sidebarTextColor} shadow-2xl flex-shrink-0`}
+        className={`hidden md:flex flex-col w-64 h-full ${sidebarColor} ${sidebarTextColor} shadow-2xl shrink-0`}
       >
         <div className="p-6 border-b border-blue-800 dark:border-slate-700">
           <h1 className="text-2xl font-bold mb-1 tracking-wider text-blue-400">

@@ -460,10 +460,10 @@ const AdminDashboard = ({ onLogout }) => {
   return (
     <div className={`min-h-screen ${FORMAL_COLORS.BG_PRIMARY} flex ${FORMAL_COLORS.TEXT_PRIMARY} font-sans overflow-hidden`}>
       {/* Sidebar - FIXED LAYOUT WITH SCROLLABLE MENU */}
-      <div className={`fixed inset-y-0 left-0 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:static md:flex-shrink-0 w-64 ${FORMAL_COLORS.BG_SIDEBAR} p-6 flex flex-col shadow-2xl transition-transform z-30 h-screen`}>
+      <div className={`fixed inset-y-0 left-0 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:static md:shrink-0 w-64 ${FORMAL_COLORS.BG_SIDEBAR} p-6 flex flex-col shadow-2xl transition-transform z-30 h-screen`}>
         
         {/* Header - Fixed */}
-        <div className="flex-shrink-0 mb-6">
+        <div className="shrink-0 mb-6">
             <h1 className="text-2xl font-extrabold text-blue-400 flex items-center"><LayoutDashboard className="mr-2"/> Admin</h1>
         </div>
 
@@ -486,7 +486,7 @@ const AdminDashboard = ({ onLogout }) => {
         </nav>
         
         {/* Sign Out - Fixed at Bottom */}
-        <div className="flex-shrink-0 mt-4 pt-6 border-t border-slate-700">
+        <div className="shrink-0 mt-4 pt-6 border-t border-slate-700">
             <button onClick={handleLogoutClick} className="flex items-center w-full px-4 py-3 text-red-400 hover:bg-slate-800 hover:text-red-300 rounded-xl transition">
                 <LogOut className="mr-3" />
                 Sign Out
@@ -497,7 +497,7 @@ const AdminDashboard = ({ onLogout }) => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden h-screen">
         {/* Top Bar */}
-        <header className={`${FORMAL_COLORS.BG_SECONDARY} p-4 flex justify-between items-center shadow-lg flex-shrink-0`}>
+        <header className={`${FORMAL_COLORS.BG_SECONDARY} p-4 flex justify-between items-center shadow-lg shrink-0`}>
             <button onClick={() => setIsSidebarOpen(true)} className="md:hidden text-white"><Menu/></button>
             <div className="flex items-center space-x-3 ml-auto">
                 <div className="text-right">

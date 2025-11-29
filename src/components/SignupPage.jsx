@@ -97,7 +97,7 @@ const InputField = ({
             {InputElement}
             {error && (
                 <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
-                    <AlertTriangle className="w-3 h-3 flex-shrink-0" />
+                    <AlertTriangle className="w-3 h-3 shrink-0" />
                     {error}
                 </p>
             )}
@@ -734,7 +734,7 @@ export default function SignupPage({ onSwitch = () => {}, onSuccess, apiBaseUrl 
                                     </div>
                                     {termsError && (
                                         <p className="mt-2 text-xs text-red-600 flex items-center gap-1 ml-6">
-                                            <AlertTriangle className="w-3 h-3 flex-shrink-0" />
+                                            <AlertTriangle className="w-3 h-3 shrink-0" />
                                             {termsError}
                                         </p>
                                     )}
@@ -761,7 +761,7 @@ export default function SignupPage({ onSwitch = () => {}, onSuccess, apiBaseUrl 
                                                     transition={{ delay: 0.1, duration: 0.3 }}
                                                     className="p-3 mb-3 rounded-md text-sm font-medium bg-red-50 text-red-700 border border-red-300 flex items-center gap-2 text-left"
                                                 >
-                                                    <ScanFace className="w-4 h-4 flex-shrink-0" />
+                                                    <ScanFace className="w-4 h-4 shrink-0" />
                                                     <span className="font-bold">
                                                         Facial Biometric Registration is REQUIRED for
                                                         students.
@@ -808,7 +808,7 @@ export default function SignupPage({ onSwitch = () => {}, onSuccess, apiBaseUrl 
                                                         {!photo ? (
                                                             <>
                                                                 <div className="flex items-start text-left bg-blue-50/70 p-3 mb-4 rounded-lg border border-blue-200">
-                                                                    <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mr-3 mt-1" />
+                                                                    <Info className="w-5 h-5 text-blue-600 shrink-0 mr-3 mt-1" />
                                                                     <p className="text-gray-700 text-sm">
                                                                         1. Press Activate Camera.<br></br>
                                                                         2. Center your face and hold still.<br></br>
@@ -898,7 +898,7 @@ export default function SignupPage({ onSwitch = () => {}, onSuccess, apiBaseUrl 
                                                 : "bg-red-100 text-red-700 border border-red-300"
                                         } flex items-center gap-2 mt-4`}
                                     >
-                                        <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                                        <AlertTriangle className="w-4 h-4 shrink-0" />
                                         <span>{message}</span>
                                     </motion.div>
                                 )}

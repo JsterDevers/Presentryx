@@ -102,7 +102,7 @@ const DevelopmentFlowChartModal = ({ isOpen, onClose }) => {
         exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.3 }}
         // MODAL BODY: Added gradient background to modal
-        className="bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 rounded-none shadow-2xl w-screen h-screen p-6 sm:p-10 overflow-y-auto text-gray-100"
+        className="bg-linear-to-br from-slate-900 via-gray-900 to-slate-800 rounded-none shadow-2xl w-screen h-screen p-6 sm:p-10 overflow-y-auto text-gray-100"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mx-auto max-w-7xl">
@@ -208,7 +208,7 @@ export default function DevelopersPage({ onConnect }) {
             "url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=1920&q=80')",
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a]/95 via-[#1e293b]/90 to-[#334155]/95"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-[#0f172a]/95 via-[#1e293b]/90 to-[#334155]/95"></div>
 
       {/* Subtle Grid/Pattern Overlay */}
       <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(90deg, transparent 99%, #334155 1%), linear-gradient(#334155 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
@@ -262,7 +262,7 @@ export default function DevelopersPage({ onConnect }) {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.4, delay: index * 0.1 }}
                             // Adjusted w-80 on mobile for better scroll, and used lg:w-auto for grid
-                            className={`flex-shrink-0 w-80 lg:w-auto snap-center flex flex-col items-center text-center p-6 rounded-xl transition-all duration-300 transform hover:shadow-lg bg-white border border-gray-100 lg:hover:bg-gray-50/50`}
+                            className={`shrink-0 w-80 lg:w-auto snap-center flex flex-col items-center text-center p-6 rounded-xl transition-all duration-300 transform hover:shadow-lg bg-white border border-gray-100 lg:hover:bg-gray-50/50`}
                         >
                             {/* Image Holder */}
                             <img

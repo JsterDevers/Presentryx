@@ -37,7 +37,7 @@ function AppHeader({ onSignUpClick, onLoginClick, onDevTeamClick }) {
       */}
       <nav className="relative container mx-auto max-w-[1920px] px-4 md:px-6 lg:px-10 py-3 lg:py-4 flex justify-between items-center">
         {/* --- LEFT: Logo & Brand --- */}
-        <div className="flex items-center gap-2 z-20 flex-shrink-0">
+        <div className="flex items-center gap-2 z-20 shrink-0">
           <img
             src={logoPlaceholderUrl}
             alt="Presentryx Logo"

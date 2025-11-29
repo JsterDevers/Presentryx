@@ -665,7 +665,7 @@ const Sidebar = ({
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className={`h-full flex flex-col justify-between ${FORMAL_COLORS.BG_PRIMARY
         }
-			p-6 flex-shrink-0 w-64
+			p-6 shrink-0 w-64
 			${isMobileDrawer
           ? `fixed inset-y-0 left-0 z-50 shadow-2xl lg:hidden`
           : `relative shadow-2xl lg:shadow-none` // Static state on desktop
@@ -2965,7 +2965,7 @@ const DashboardMain = ({ onLogout }) => {
       {/* --- SIDEBARS --- */}
 
       {/* FUNCTIONAL DESKTOP SIDEBAR (Visible on Desktop) */}
-      <div className="hidden lg:flex w-64 flex-shrink-0 fixed inset-y-0 left-0 z-40">
+      <div className="hidden lg:flex w-64 shrink-0 fixed inset-y-0 left-0 z-40">
         <Sidebar
           activePage={activePage}
           setActivePage={(page) => handleSetPage(page)} // Use combined function
