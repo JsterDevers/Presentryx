@@ -246,7 +246,7 @@ export default function App() {
         {/* If the dynamic URL calculation failed, show a non-blocking warning. */}
         {!isUrlSetupCorrect && (
           <div className="absolute top-0 left-0 right-0 p-3 bg-red-100 text-red-700 text-xs font-medium border-b border-red-300 z-50 flex items-center justify-center gap-2">
-            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+            <AlertTriangle className="w-4 h-4 shrink-0" />
             <p>SETUP ALERT: Could not automatically determine API Base URL. Network calls might fail.</p>
           </div>
         )}
@@ -261,7 +261,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#3b0dab] via-[#4b2cc6] to-[#081a51] text-white">
+    <div className="min-h-screen relative overflow-hidden bg-linear-to-b from-[#3b0dab] via-[#4b2cc6] to-[#081a51] text-white">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <div className="absolute bg-white/10 rounded-full w-24 h-24 top-10 left-20 blur-3xl animate-pulse"></div>
         <div className="absolute bg-indigo-400/20 rounded-full w-48 h-48 bottom-20 right-32 blur-2xl animate-pulse"></div>
